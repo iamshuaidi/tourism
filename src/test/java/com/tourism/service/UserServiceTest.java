@@ -15,7 +15,7 @@ public class UserServiceTest {
     @Autowired
     UserService userService;
 
-    @Test
+   /* @Test
     public void login() {
         Map<String, Object> map = userService.login("123","12");
         if (map.containsKey("msg")) {
@@ -24,5 +24,5 @@ public class UserServiceTest {
         }
 
         System.out.println(map.get("user"));
-    }
+    }*/
 }

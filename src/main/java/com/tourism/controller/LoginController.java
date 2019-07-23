@@ -1,6 +1,6 @@
 package com.tourism.controller;
 
-import com.tourism.model.User;
+
 import com.tourism.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -14,17 +14,17 @@ import java.util.Map;
 @Controller
 public class LoginController {
 
-    @Autowired
+   /* @Autowired
     UserService userService;
 
-    /**
+    *//**
      *
      * @param model 用来填充视图数据
      * @param username 用户名
      * @param password 密码
      * @param phone 注册的手机号码
      * @return 返回一个 html 页面
-     */
+     *//*
     @RequestMapping(path = "/reg", method = RequestMethod.POST)
     public String register(Model model, @RequestParam("username") String username,
                            @RequestParam("password")String password, @RequestParam("phone")String phone){
@@ -34,7 +34,7 @@ public class LoginController {
             System.out.println("出错了");
             return "/register";
         }
-        User user = userService.getUserByName(username);
+      User user = userService.getUserByName(username);
         System.out.println(user + "   " + user.getName());
         model.addAttribute("user", user);
         //注册成功跳转到个人中心
@@ -51,5 +51,5 @@ public class LoginController {
         model.addAttribute("user", map.get("user"));
         //登陆成功跳转到个人中心
         return "home";
-    }
+    }*/
 }
