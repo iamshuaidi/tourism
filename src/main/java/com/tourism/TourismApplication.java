@@ -6,7 +6,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 
 @SpringBootApplication(scanBasePackages={"com.tourism.service",
-		"com.tourism.controller", "com.tourism.serviceImpl","com.tourism.mapping"})
+		"com.tourism.controller", "com.tourism.serviceImpl"})
 @MapperScan("com.tourism.dao")
 public class TourismApplication {
 
