@@ -1,0 +1,189 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.tourism.dao.CookieMapper">
+  <resultMap id="BaseResultMap" type="com.tourism.model.Cookie">
+    <result column="id" jdbcType="INTEGER" property="id" />
+    <result column="cookie" jdbcType="VARCHAR" property="cookie" />
+    <result column="cookie_status" jdbcType="TINYINT" property="cookieStatus" />
+    <result column="login_time" jdbcType="TIMESTAMP" property="loginTime" />
+    <result column="valid_time" jdbcType="TIMESTAMP" property="validTime" />
+    <result column="user_id" jdbcType="INTEGER" property="userId" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    id, cookie, cookie_status, login_time, valid_time, user_id
+  </sql>
+  <select id="selectByExample" parameterType="com.tourism.model.CookieExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from cookie
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <delete id="deleteByExample" parameterType="com.tourism.model.CookieExample">
+    delete from cookie
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.tourism.model.Cookie">
+    insert into cookie (id, cookie, cookie_status, 
+      login_time, valid_time, user_id
+      )
+    values (#{id,jdbcType=INTEGER}, #{cookie,jdbcType=VARCHAR}, #{cookieStatus,jdbcType=TINYINT}, 
+      #{loginTime,jdbcType=TIMESTAMP}, #{validTime,jdbcType=TIMESTAMP}, #{userId,jdbcType=INTEGER}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.tourism.model.Cookie">
+    insert into cookie
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="cookie != null">
+        cookie,
+      </if>
+      <if test="cookieStatus != null">
+        cookie_status,
+      </if>
+      <if test="loginTime != null">
+        login_time,
+      </if>
+      <if test="validTime != null">
+        valid_time,
+      </if>
+      <if test="userId != null">
+        user_id,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="cookie != null">
+        #{cookie,jdbcType=VARCHAR},
+      </if>
+      <if test="cookieStatus != null">
+        #{cookieStatus,jdbcType=TINYINT},
+      </if>
+      <if test="loginTime != null">
+        #{loginTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="validTime != null">
+        #{validTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="userId != null">
+        #{userId,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.tourism.model.CookieExample" resultType="java.lang.Long">
+    select count(*) from cookie
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update cookie
+    <set>
+      <if test="record.id != null">
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.cookie != null">
+        cookie = #{record.cookie,jdbcType=VARCHAR},
+      </if>
+      <if test="record.cookieStatus != null">
+        cookie_status = #{record.cookieStatus,jdbcType=TINYINT},
+      </if>
+      <if test="record.loginTime != null">
+        login_time = #{record.loginTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.validTime != null">
+        valid_time = #{record.validTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.userId != null">
+        user_id = #{record.userId,jdbcType=INTEGER},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update cookie
+    set id = #{record.id,jdbcType=INTEGER},
+      cookie = #{record.cookie,jdbcType=VARCHAR},
+      cookie_status = #{record.cookieStatus,jdbcType=TINYINT},
+      login_time = #{record.loginTime,jdbcType=TIMESTAMP},
+      valid_time = #{record.validTime,jdbcType=TIMESTAMP},
+      user_id = #{record.userId,jdbcType=INTEGER}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+</mapper>

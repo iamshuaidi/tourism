@@ -12,8 +12,9 @@ public class HomeController {
      * 自动跳转到登录注册界面
      * @return
      */
-    @RequestMapping(name="/", method = RequestMethod.GET)
+
+ /*   @RequestMapping(name="/", method = RequestMethod.GET)
     public String reglogin() {
         return "register";
-    }
+    }*/
 }
