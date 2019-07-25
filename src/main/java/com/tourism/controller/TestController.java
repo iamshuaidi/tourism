@@ -9,7 +9,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import java.util.Map;
 import java.util.UUID;
 
 @Controller
@@ -19,7 +18,7 @@ public class TestController {
     @Autowired
     TestService testService;
 
-    @RequestMapping(path = "/reg", method = RequestMethod.POST)
+    @RequestMapping(value = "/reg", method = RequestMethod.POST)
     public String register(Model model, @RequestParam("username") String username,
                            @RequestParam("password")String password, @RequestParam("phone")String phone){
        Admin admin = new Admin();
