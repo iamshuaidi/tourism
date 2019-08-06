@@ -293,6 +293,196 @@ public class ParkExample {
             addCriterion("vacancy not between", value1, value2, "vacancy");
             return (Criteria) this;
         }
+
+        public Criteria andDistanceIsNull() {
+            addCriterion("distance is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andDistanceIsNotNull() {
+            addCriterion("distance is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andDistanceEqualTo(Double value) {
+            addCriterion("distance =", value, "distance");
+            return (Criteria) this;
+        }
+
+        public Criteria andDistanceNotEqualTo(Double value) {
+            addCriterion("distance <>", value, "distance");
+            return (Criteria) this;
+        }
+
+        public Criteria andDistanceGreaterThan(Double value) {
+            addCriterion("distance >", value, "distance");
+            return (Criteria) this;
+        }
+
+        public Criteria andDistanceGreaterThanOrEqualTo(Double value) {
+            addCriterion("distance >=", value, "distance");
+            return (Criteria) this;
+        }
+
+        public Criteria andDistanceLessThan(Double value) {
+            addCriterion("distance <", value, "distance");
+            return (Criteria) this;
+        }
+
+        public Criteria andDistanceLessThanOrEqualTo(Double value) {
+            addCriterion("distance <=", value, "distance");
+            return (Criteria) this;
+        }
+
+        public Criteria andDistanceIn(List<Double> values) {
+            addCriterion("distance in", values, "distance");
+            return (Criteria) this;
+        }
+
+        public Criteria andDistanceNotIn(List<Double> values) {
+            addCriterion("distance not in", values, "distance");
+            return (Criteria) this;
+        }
+
+        public Criteria andDistanceBetween(Double value1, Double value2) {
+            addCriterion("distance between", value1, value2, "distance");
+            return (Criteria) this;
+        }
+
+        public Criteria andDistanceNotBetween(Double value1, Double value2) {
+            addCriterion("distance not between", value1, value2, "distance");
+            return (Criteria) this;
+        }
+
+        public Criteria andFeeIsNull() {
+            addCriterion("fee is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andFeeIsNotNull() {
+            addCriterion("fee is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andFeeEqualTo(Double value) {
+            addCriterion("fee =", value, "fee");
+            return (Criteria) this;
+        }
+
+        public Criteria andFeeNotEqualTo(Double value) {
+            addCriterion("fee <>", value, "fee");
+            return (Criteria) this;
+        }
+
+        public Criteria andFeeGreaterThan(Double value) {
+            addCriterion("fee >", value, "fee");
+            return (Criteria) this;
+        }
+
+        public Criteria andFeeGreaterThanOrEqualTo(Double value) {
+            addCriterion("fee >=", value, "fee");
+            return (Criteria) this;
+        }
+
+        public Criteria andFeeLessThan(Double value) {
+            addCriterion("fee <", value, "fee");
+            return (Criteria) this;
+        }
+
+        public Criteria andFeeLessThanOrEqualTo(Double value) {
+            addCriterion("fee <=", value, "fee");
+            return (Criteria) this;
+        }
+
+        public Criteria andFeeIn(List<Double> values) {
+            addCriterion("fee in", values, "fee");
+            return (Criteria) this;
+        }
+
+        public Criteria andFeeNotIn(List<Double> values) {
+            addCriterion("fee not in", values, "fee");
+            return (Criteria) this;
+        }
+
+        public Criteria andFeeBetween(Double value1, Double value2) {
+            addCriterion("fee between", value1, value2, "fee");
+            return (Criteria) this;
+        }
+
+        public Criteria andFeeNotBetween(Double value1, Double value2) {
+            addCriterion("fee not between", value1, value2, "fee");
+            return (Criteria) this;
+        }
+
+        public Criteria andImageUrlIsNull() {
+            addCriterion("image_url is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andImageUrlIsNotNull() {
+            addCriterion("image_url is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andImageUrlEqualTo(String value) {
+            addCriterion("image_url =", value, "imageUrl");
+            return (Criteria) this;
+        }
+
+        public Criteria andImageUrlNotEqualTo(String value) {
+            addCriterion("image_url <>", value, "imageUrl");
+            return (Criteria) this;
+        }
+
+        public Criteria andImageUrlGreaterThan(String value) {
+            addCriterion("image_url >", value, "imageUrl");
+            return (Criteria) this;
+        }
+
+        public Criteria andImageUrlGreaterThanOrEqualTo(String value) {
+            addCriterion("image_url >=", value, "imageUrl");
+            return (Criteria) this;
+        }
+
+        public Criteria andImageUrlLessThan(String value) {
+            addCriterion("image_url <", value, "imageUrl");
+            return (Criteria) this;
+        }
+
+        public Criteria andImageUrlLessThanOrEqualTo(String value) {
+            addCriterion("image_url <=", value, "imageUrl");
+            return (Criteria) this;
+        }
+
+        public Criteria andImageUrlLike(String value) {
+            addCriterion("image_url like", value, "imageUrl");
+            return (Criteria) this;
+        }
+
+        public Criteria andImageUrlNotLike(String value) {
+            addCriterion("image_url not like", value, "imageUrl");
+            return (Criteria) this;
+        }
+
+        public Criteria andImageUrlIn(List<String> values) {
+            addCriterion("image_url in", values, "imageUrl");
+            return (Criteria) this;
+        }
+
+        public Criteria andImageUrlNotIn(List<String> values) {
+            addCriterion("image_url not in", values, "imageUrl");
+            return (Criteria) this;
+        }
+
+        public Criteria andImageUrlBetween(String value1, String value2) {
+            addCriterion("image_url between", value1, value2, "imageUrl");
+            return (Criteria) this;
+        }
+
+        public Criteria andImageUrlNotBetween(String value1, String value2) {
+            addCriterion("image_url not between", value1, value2, "imageUrl");
+            return (Criteria) this;
+        }
     }
 
     public static class Criteria extends GeneratedCriteria {

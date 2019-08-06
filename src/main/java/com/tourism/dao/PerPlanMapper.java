@@ -10,13 +10,21 @@ public interface PerPlanMapper {
 
     int deleteByExample(PerPlanExample example);
 
+    int deleteByPrimaryKey(Integer id);
+
     int insert(PerPlan record);
 
     int insertSelective(PerPlan record);
 
     List<PerPlan> selectByExample(PerPlanExample example);
 
+    PerPlan selectByPrimaryKey(Integer id);
+
     int updateByExampleSelective(@Param("record") PerPlan record, @Param("example") PerPlanExample example);
 
     int updateByExample(@Param("record") PerPlan record, @Param("example") PerPlanExample example);
+
+    int updateByPrimaryKeySelective(PerPlan record);
+
+    int updateByPrimaryKey(PerPlan record);
 }

@@ -13,7 +13,7 @@ public class Cookie {
 
     private Date validTime;
 
-    private Integer userId;
+    private Integer adminId;
 
     public Integer getId() {
         return id;
@@ -55,11 +55,11 @@ public class Cookie {
         this.validTime = validTime;
     }
 
-    public Integer getUserId() {
-        return userId;
+    public Integer getAdminId() {
+        return adminId;
     }
 
-    public void setUserId(Integer userId) {
-        this.userId = userId;
+    public void setAdminId(Integer adminId) {
+        this.adminId = adminId;
     }
 }

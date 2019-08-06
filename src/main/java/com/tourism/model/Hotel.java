@@ -7,6 +7,14 @@ public class Hotel {
 
     private Integer vacancy;
 
+    private String phone;
+
+    private Double distance;
+
+    private Integer popularity;
+
+    private String imageUrl;
+
     public Integer getId() {
         return id;
     }
@@ -29,5 +37,37 @@ public class Hotel {
 
     public void setVacancy(Integer vacancy) {
         this.vacancy = vacancy;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone == null ? null : phone.trim();
+    }
+
+    public Double getDistance() {
+        return distance;
+    }
+
+    public void setDistance(Double distance) {
+        this.distance = distance;
+    }
+
+    public Integer getPopularity() {
+        return popularity;
+    }
+
+    public void setPopularity(Integer popularity) {
+        this.popularity = popularity;
+    }
+
+    public String getImageUrl() {
+        return imageUrl;
+    }
+
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl == null ? null : imageUrl.trim();
     }
 }
