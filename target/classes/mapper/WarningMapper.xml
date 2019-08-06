@@ -2,10 +2,15 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.tourism.dao.WarningMapper">
   <resultMap id="BaseResultMap" type="com.tourism.model.Warning">
-    <result column="id" jdbcType="INTEGER" property="id" />
-    <result column="content" jdbcType="VARCHAR" property="content" />
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="type" jdbcType="VARCHAR" property="type" />
+    <result column="title" jdbcType="VARCHAR" property="title" />
+    <result column="state" jdbcType="VARCHAR" property="state" />
     <result column="time" jdbcType="TIMESTAMP" property="time" />
     <result column="admin_id" jdbcType="INTEGER" property="adminId" />
+  </resultMap>
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.tourism.model.Warning">
+    <result column="content" jdbcType="LONGVARCHAR" property="content" />
   </resultMap>
   <sql id="Example_Where_Clause">
     <where>
@@ -66,8 +71,28 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    id, content, time, admin_id
+    id, type, title, state, time, admin_id
   </sql>
+  <sql id="Blob_Column_List">
+    content
+  </sql>
+  <select id="selectByExampleWithBLOBs" parameterType="com.tourism.model.WarningExample" resultMap="ResultMapWithBLOBs">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from warning
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
   <select id="selectByExample" parameterType="com.tourism.model.WarningExample" resultMap="BaseResultMap">
     select
     <if test="distinct">
@@ -83,6 +108,18 @@
       order by ${orderByClause}
     </if>
   </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="ResultMapWithBLOBs">
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from warning
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from warning
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
   <delete id="deleteByExample" parameterType="com.tourism.model.WarningExample">
     delete from warning
     <if test="_parameter != null">
@@ -90,10 +127,12 @@
     </if>
   </delete>
   <insert id="insert" parameterType="com.tourism.model.Warning">
-    insert into warning (id, content, time, 
-      admin_id)
-    values (#{id,jdbcType=INTEGER}, #{content,jdbcType=VARCHAR}, #{time,jdbcType=TIMESTAMP}, 
-      #{adminId,jdbcType=INTEGER})
+    insert into warning (id, type, title, 
+      state, time, admin_id, 
+      content)
+    values (#{id,jdbcType=INTEGER}, #{type,jdbcType=VARCHAR}, #{title,jdbcType=VARCHAR}, 
+      #{state,jdbcType=VARCHAR}, #{time,jdbcType=TIMESTAMP}, #{adminId,jdbcType=INTEGER}, 
+      #{content,jdbcType=LONGVARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.tourism.model.Warning">
     insert into warning
@@ -101,8 +140,14 @@
       <if test="id != null">
         id,
       </if>
-      <if test="content != null">
-        content,
+      <if test="type != null">
+        type,
+      </if>
+      <if test="title != null">
+        title,
+      </if>
+      <if test="state != null">
+        state,
       </if>
       <if test="time != null">
         time,
@@ -110,19 +155,31 @@
       <if test="adminId != null">
         admin_id,
       </if>
+      <if test="content != null">
+        content,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="id != null">
         #{id,jdbcType=INTEGER},
       </if>
-      <if test="content != null">
-        #{content,jdbcType=VARCHAR},
+      <if test="type != null">
+        #{type,jdbcType=VARCHAR},
+      </if>
+      <if test="title != null">
+        #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="state != null">
+        #{state,jdbcType=VARCHAR},
       </if>
       <if test="time != null">
         #{time,jdbcType=TIMESTAMP},
       </if>
       <if test="adminId != null">
         #{adminId,jdbcType=INTEGER},
+      </if>
+      <if test="content != null">
+        #{content,jdbcType=LONGVARCHAR},
       </if>
     </trim>
   </insert>
@@ -138,8 +195,14 @@
       <if test="record.id != null">
         id = #{record.id,jdbcType=INTEGER},
       </if>
-      <if test="record.content != null">
-        content = #{record.content,jdbcType=VARCHAR},
+      <if test="record.type != null">
+        type = #{record.type,jdbcType=VARCHAR},
+      </if>
+      <if test="record.title != null">
+        title = #{record.title,jdbcType=VARCHAR},
+      </if>
+      <if test="record.state != null">
+        state = #{record.state,jdbcType=VARCHAR},
       </if>
       <if test="record.time != null">
         time = #{record.time,jdbcType=TIMESTAMP},
@@ -147,7 +210,23 @@
       <if test="record.adminId != null">
         admin_id = #{record.adminId,jdbcType=INTEGER},
       </if>
+      <if test="record.content != null">
+        content = #{record.content,jdbcType=LONGVARCHAR},
+      </if>
     </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExampleWithBLOBs" parameterType="map">
+    update warning
+    set id = #{record.id,jdbcType=INTEGER},
+      type = #{record.type,jdbcType=VARCHAR},
+      title = #{record.title,jdbcType=VARCHAR},
+      state = #{record.state,jdbcType=VARCHAR},
+      time = #{record.time,jdbcType=TIMESTAMP},
+      admin_id = #{record.adminId,jdbcType=INTEGER},
+      content = #{record.content,jdbcType=LONGVARCHAR}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -155,11 +234,56 @@
   <update id="updateByExample" parameterType="map">
     update warning
     set id = #{record.id,jdbcType=INTEGER},
-      content = #{record.content,jdbcType=VARCHAR},
+      type = #{record.type,jdbcType=VARCHAR},
+      title = #{record.title,jdbcType=VARCHAR},
+      state = #{record.state,jdbcType=VARCHAR},
       time = #{record.time,jdbcType=TIMESTAMP},
       admin_id = #{record.adminId,jdbcType=INTEGER}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.tourism.model.Warning">
+    update warning
+    <set>
+      <if test="type != null">
+        type = #{type,jdbcType=VARCHAR},
+      </if>
+      <if test="title != null">
+        title = #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="state != null">
+        state = #{state,jdbcType=VARCHAR},
+      </if>
+      <if test="time != null">
+        time = #{time,jdbcType=TIMESTAMP},
+      </if>
+      <if test="adminId != null">
+        admin_id = #{adminId,jdbcType=INTEGER},
+      </if>
+      <if test="content != null">
+        content = #{content,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.tourism.model.Warning">
+    update warning
+    set type = #{type,jdbcType=VARCHAR},
+      title = #{title,jdbcType=VARCHAR},
+      state = #{state,jdbcType=VARCHAR},
+      time = #{time,jdbcType=TIMESTAMP},
+      admin_id = #{adminId,jdbcType=INTEGER},
+      content = #{content,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.tourism.model.Warning">
+    update warning
+    set type = #{type,jdbcType=VARCHAR},
+      title = #{title,jdbcType=VARCHAR},
+      state = #{state,jdbcType=VARCHAR},
+      time = #{time,jdbcType=TIMESTAMP},
+      admin_id = #{adminId,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER}
   </update>
 </mapper>

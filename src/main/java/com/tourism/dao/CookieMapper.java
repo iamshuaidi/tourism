@@ -10,13 +10,21 @@ public interface CookieMapper {
 
     int deleteByExample(CookieExample example);
 
+    int deleteByPrimaryKey(Integer id);
+
     int insert(Cookie record);
 
     int insertSelective(Cookie record);
 
     List<Cookie> selectByExample(CookieExample example);
 
+    Cookie selectByPrimaryKey(Integer id);
+
     int updateByExampleSelective(@Param("record") Cookie record, @Param("example") CookieExample example);
 
     int updateByExample(@Param("record") Cookie record, @Param("example") CookieExample example);
+
+    int updateByPrimaryKeySelective(Cookie record);
+
+    int updateByPrimaryKey(Cookie record);
 }

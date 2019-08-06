@@ -5,15 +5,11 @@ public class PerEmer {
 
     private String name;
 
-    private String pwd;
-
-    private String salt;
-
     private String phone;
 
-    private Integer idNum;
+    private String gender;
 
-    private String avatarUrl;
+    private String job;
 
     public Integer getId() {
         return id;
@@ -31,22 +27,6 @@ public class PerEmer {
         this.name = name == null ? null : name.trim();
     }
 
-    public String getPwd() {
-        return pwd;
-    }
-
-    public void setPwd(String pwd) {
-        this.pwd = pwd == null ? null : pwd.trim();
-    }
-
-    public String getSalt() {
-        return salt;
-    }
-
-    public void setSalt(String salt) {
-        this.salt = salt == null ? null : salt.trim();
-    }
-
     public String getPhone() {
         return phone;
     }
@@ -55,19 +35,19 @@ public class PerEmer {
         this.phone = phone == null ? null : phone.trim();
     }
 
-    public Integer getIdNum() {
-        return idNum;
+    public String getGender() {
+        return gender;
     }
 
-    public void setIdNum(Integer idNum) {
-        this.idNum = idNum;
+    public void setGender(String gender) {
+        this.gender = gender == null ? null : gender.trim();
     }
 
-    public String getAvatarUrl() {
-        return avatarUrl;
+    public String getJob() {
+        return job;
     }
 
-    public void setAvatarUrl(String avatarUrl) {
-        this.avatarUrl = avatarUrl == null ? null : avatarUrl.trim();
+    public void setJob(String job) {
+        this.job = job == null ? null : job.trim();
     }
 }

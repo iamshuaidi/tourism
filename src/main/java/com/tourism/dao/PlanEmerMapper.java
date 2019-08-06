@@ -10,13 +10,21 @@ public interface PlanEmerMapper {
 
     int deleteByExample(PlanEmerExample example);
 
+    int deleteByPrimaryKey(Integer id);
+
     int insert(PlanEmer record);
 
     int insertSelective(PlanEmer record);
 
     List<PlanEmer> selectByExample(PlanEmerExample example);
 
+    PlanEmer selectByPrimaryKey(Integer id);
+
     int updateByExampleSelective(@Param("record") PlanEmer record, @Param("example") PlanEmerExample example);
 
     int updateByExample(@Param("record") PlanEmer record, @Param("example") PlanEmerExample example);
+
+    int updateByPrimaryKeySelective(PlanEmer record);
+
+    int updateByPrimaryKey(PlanEmer record);
 }

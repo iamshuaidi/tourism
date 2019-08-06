@@ -3,7 +3,9 @@ package com.tourism.model;
 public class PlanEmer {
     private Integer id;
 
-    private String desc;
+    private String type;
+
+    private String title;
 
     private String plan;
 
@@ -17,12 +19,20 @@ public class PlanEmer {
         this.id = id;
     }
 
-    public String getDesc() {
-        return desc;
+    public String getType() {
+        return type;
     }
 
-    public void setDesc(String desc) {
-        this.desc = desc == null ? null : desc.trim();
+    public void setType(String type) {
+        this.type = type == null ? null : type.trim();
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title == null ? null : title.trim();
     }
 
     public String getPlan() {

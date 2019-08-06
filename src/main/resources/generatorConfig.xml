@@ -5,7 +5,7 @@
 <generatorConfiguration>
     <!--数据库驱动-->
     <classPathEntry
-            location="C:\Users\Administrator\.m2\repository\mysql\mysql-connector-java\8.0.16\mysql-connector-java-8.0.16.jar"/>
+            location="C:\Users\20133\.m2\repository\mysql\mysql-connector-java\8.0.16\mysql-connector-java-8.0.16.jar"/>
     <context id="DB2Tables" targetRuntime="MyBatis3">
         <commentGenerator>
             <property name="suppressDate" value="true"/>
@@ -33,7 +33,6 @@
         </javaClientGenerator>
         <!--对应的数据库表及model中生成的类名-->
         <table tableName="admin" domainObjectName="Admin" enableCountByExample="true" enableUpdateByExample="true" enableDeleteByExample="true" enableSelectByExample="true" selectByExampleQueryId="true"></table>
-        <table tableName="tourist" domainObjectName="Tourist" enableCountByExample="true" enableUpdateByExample="true" enableDeleteByExample="true" enableSelectByExample="true" selectByExampleQueryId="true"></table>
         <table tableName="per_emer" domainObjectName="PerEmer" enableCountByExample="true" enableUpdateByExample="true" enableDeleteByExample="true" enableSelectByExample="true" selectByExampleQueryId="true"></table>
         <table tableName="plan_emer" domainObjectName="PlanEmer" enableCountByExample="true" enableUpdateByExample="true" enableDeleteByExample="true" enableSelectByExample="true" selectByExampleQueryId="true"></table>
         <table tableName="per_plan" domainObjectName="PerPlan" enableCountByExample="true" enableUpdateByExample="true" enableDeleteByExample="true" enableSelectByExample="true" selectByExampleQueryId="true"></table>

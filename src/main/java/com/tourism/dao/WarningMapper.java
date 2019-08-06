@@ -10,13 +10,27 @@ public interface WarningMapper {
 
     int deleteByExample(WarningExample example);
 
+    int deleteByPrimaryKey(Integer id);
+
     int insert(Warning record);
 
     int insertSelective(Warning record);
 
+    List<Warning> selectByExampleWithBLOBs(WarningExample example);
+
     List<Warning> selectByExample(WarningExample example);
+
+    Warning selectByPrimaryKey(Integer id);
 
     int updateByExampleSelective(@Param("record") Warning record, @Param("example") WarningExample example);
 
+    int updateByExampleWithBLOBs(@Param("record") Warning record, @Param("example") WarningExample example);
+
     int updateByExample(@Param("record") Warning record, @Param("example") WarningExample example);
+
+    int updateByPrimaryKeySelective(Warning record);
+
+    int updateByPrimaryKeyWithBLOBs(Warning record);
+
+    int updateByPrimaryKey(Warning record);
 }

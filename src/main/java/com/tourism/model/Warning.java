@@ -5,11 +5,17 @@ import java.util.Date;
 public class Warning {
     private Integer id;
 
-    private String content;
+    private String type;
+
+    private String title;
+
+    private String state;
 
     private Date time;
 
     private Integer adminId;
+
+    private String content;
 
     public Integer getId() {
         return id;
@@ -19,12 +25,28 @@ public class Warning {
         this.id = id;
     }
 
-    public String getContent() {
-        return content;
+    public String getType() {
+        return type;
     }
 
-    public void setContent(String content) {
-        this.content = content == null ? null : content.trim();
+    public void setType(String type) {
+        this.type = type == null ? null : type.trim();
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title == null ? null : title.trim();
+    }
+
+    public String getState() {
+        return state;
+    }
+
+    public void setState(String state) {
+        this.state = state == null ? null : state.trim();
     }
 
     public Date getTime() {
@@ -41,5 +63,13 @@ public class Warning {
 
     public void setAdminId(Integer adminId) {
         this.adminId = adminId;
+    }
+
+    public String getContent() {
+        return content;
+    }
+
+    public void setContent(String content) {
+        this.content = content == null ? null : content.trim();
     }
 }
