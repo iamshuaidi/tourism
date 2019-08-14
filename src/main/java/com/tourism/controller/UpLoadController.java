@@ -11,4 +11,6 @@ public class UpLoadController {
     public String uploadImage(){
             return "static/image/111.jpg";
     }
+
+
 }

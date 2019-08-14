@@ -1,55 +1,41 @@
 package com.tourism.controller;
 
 
-import com.tourism.service.UserService;
+import com.alibaba.fastjson.JSONObject;
+import com.tourism.model.Admin;
+import com.tourism.service.AdminService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
+import java.util.HashMap;
 import java.util.Map;
 
 @Controller
 public class LoginController {
 
-   /* @Autowired
-    UserService userService;
+    @Autowired
+    AdminService adminService;
 
-    *//**
-     *
-     * @param model 用来填充视图数据
-     * @param username 用户名
-     * @param password 密码
-     * @param phone 注册的手机号码
-     * @return 返回一个 html 页面
-     *//*
-    @RequestMapping(path = "/reg", method = RequestMethod.POST)
-    public String register(Model model, @RequestParam("username") String username,
-                           @RequestParam("password")String password, @RequestParam("phone")String phone){
-        Map<String, Object> map = userService.register(username, password, phone);
-        if (map.containsKey("msg")) {
-            model.addAttribute("msg", map.get("msg"));
-            System.out.println("出错了");
-            return "/register";
-        }
-      User user = userService.getUserByName(username);
-        System.out.println(user + "   " + user.getName());
-        model.addAttribute("user", user);
-        //注册成功跳转到个人中心
-        return "home";
+
+
+    @CrossOrigin
+    @RequestMapping(value = "/login", method = RequestMethod.POST)
+    @ResponseBody
+    public String login(Admin admin) {
+
+        Map<String, Object> map = new HashMap<>();
+        map = adminService.login(admin.getPhone(), admin.getPwd());
+
+        return JSONObject.toJSONString(map);
+
     }
 
-    public String login(Model model, @RequestParam("username") String username,
-                        @RequestParam("password") String password) {
-        Map<String, Object> map = userService.login(username, password);
-        if (map.containsKey("msg")) {
-            model.addAttribute("msg", map.get("msg"));
-            return "/checklogin";
-        }
-        model.addAttribute("user", map.get("user"));
-        //登陆成功跳转到个人中心
-        return "home";
-    }*/
+
+
+    @RequestMapping(path = {"/logout"}, method = {RequestMethod.GET, RequestMethod.POST})
+    public String logout(@CookieValue("cookie") String cookie) {
+
+        return "";
+    }
 }
