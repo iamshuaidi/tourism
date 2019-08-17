@@ -2,12 +2,7 @@ package com.tourism.service;
 
 /*import com.tourism.dao.UserDao;
 import com.tourism.model.User;*/
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import java.util.HashMap;
-import java.util.Map;
-import java.util.UUID;
 
 @Service
 public class UserService {
@@ -69,5 +64,6 @@ public class UserService {
 
     public User getUserByName(String name){
         return userDao.selectByName(name);
-    }*/
+    }
+    */
 }
