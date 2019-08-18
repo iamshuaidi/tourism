@@ -12,5 +12,7 @@ public interface AdminService {
 
     Admin findByPhone(String phone);
 
+    Admin findById(int id);
+
 
 }

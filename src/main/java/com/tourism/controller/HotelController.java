@@ -5,10 +5,7 @@ import com.tourism.model.Hotel;
 import com.tourism.service.HotelService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
 import java.util.List;
@@ -27,9 +24,11 @@ public class HotelController {
     @CrossOrigin
     @RequestMapping(value = "/queryhotel", method = {RequestMethod.GET, RequestMethod.POST})
     @ResponseBody
-    public String queryHotel(){
+    public String queryHotel(@RequestParam("flag") int flag){
+
         Map<String, Object> map = new HashMap<>();
-        List<Hotel> hotels = hotelService.queryAllHetol();
+
+        List<Hotel> hotels = hotelService.queryAllHetol(flag);
         if(hotels == null){
             map.put("message", "找不到对应酒店");
             return JSONObject.toJSONString(map);
@@ -37,6 +36,6 @@ public class HotelController {
         map.put("message", "OK");
         map.put("hotels", hotels);
 
-        return JSONObject.toJSONString(map);
+        return JSONObject.toJSONString(hotels);
     }
 }

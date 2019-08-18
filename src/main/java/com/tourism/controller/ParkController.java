@@ -27,10 +27,10 @@ public class ParkController {
     @CrossOrigin
     @RequestMapping(value = "/querypark", method = {RequestMethod.GET, RequestMethod.POST})
     @ResponseBody
-    public String queryPark(){
+    public String queryPark(int flag){
         Map<String ,Object> map = new HashMap<>();
 
-        List<Park> parks = parkService.queryAllPark();
+        List<Park> parks = parkService.queryAllPark(flag);
         if(parks == null){
             map.put("message", "找不到对应停车位");
             return JSONObject.toJSONString(map);
@@ -38,6 +38,6 @@ public class ParkController {
         map.put("message", "OK");
         map.put("parks", parks);
 
-        return JSONObject.toJSONString(map);
+        return JSONObject.toJSONString(parks);
     }
 }
