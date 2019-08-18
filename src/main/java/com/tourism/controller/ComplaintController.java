@@ -82,11 +82,11 @@ public class ComplaintController {
     @CrossOrigin
     @RequestMapping(value = "replyComplaint")
     public void replyComplaint(@RequestParam("result") String result,
-    @RequestParam("cid")String id){
+    @RequestParam("cid")String id, @RequestParam("aid") String aid){
         Complaint complaint = complaintService.queryComplaintById(Integer.parseInt(id));
         complaint.setResult(result);
         complaint.setDealTime(new Date());
-        complaint.setAdminId(1);//暂时这样处理管理员编号
+        complaint.setAdminId(Integer.parseInt(aid));//暂时这样处理管理员编号
         complaintService.updateComplaint(complaint);
     }
 
