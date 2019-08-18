@@ -2,12 +2,18 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.tourism.dao.AlarmMapper">
   <resultMap id="BaseResultMap" type="com.tourism.model.Alarm">
-    <result column="id" jdbcType="INTEGER" property="id" />
-    <result column="content" jdbcType="VARCHAR" property="content" />
-    <result column="time" jdbcType="TIMESTAMP" property="time" />
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="number" jdbcType="VARCHAR" property="number" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="phone" jdbcType="VARCHAR" property="phone" />
+    <result column="gender" jdbcType="VARCHAR" property="gender" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
     <result column="result" jdbcType="VARCHAR" property="result" />
     <result column="admin_id" jdbcType="INTEGER" property="adminId" />
-    <result column="tourist_id" jdbcType="INTEGER" property="touristId" />
+    <result column="deal_time" jdbcType="TIMESTAMP" property="dealTime" />
+  </resultMap>
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.tourism.model.Alarm">
+    <result column="content" jdbcType="LONGVARCHAR" property="content" />
   </resultMap>
   <sql id="Example_Where_Clause">
     <where>
@@ -68,8 +74,28 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    id, content, time, result, admin_id, tourist_id
+    id, number, name, phone, gender, create_time, result, admin_id, deal_time
   </sql>
+  <sql id="Blob_Column_List">
+    content
+  </sql>
+  <select id="selectByExampleWithBLOBs" parameterType="com.tourism.model.AlarmExample" resultMap="ResultMapWithBLOBs">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from alarm
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
   <select id="selectByExample" parameterType="com.tourism.model.AlarmExample" resultMap="BaseResultMap">
     select
     <if test="distinct">
@@ -85,6 +111,18 @@
       order by ${orderByClause}
     </if>
   </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="ResultMapWithBLOBs">
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from alarm
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from alarm
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
   <delete id="deleteByExample" parameterType="com.tourism.model.AlarmExample">
     delete from alarm
     <if test="_parameter != null">
@@ -92,12 +130,14 @@
     </if>
   </delete>
   <insert id="insert" parameterType="com.tourism.model.Alarm">
-    insert into alarm (id, content, time, 
-      result, admin_id, tourist_id
-      )
-    values (#{id,jdbcType=INTEGER}, #{content,jdbcType=VARCHAR}, #{time,jdbcType=TIMESTAMP}, 
-      #{result,jdbcType=VARCHAR}, #{adminId,jdbcType=INTEGER}, #{touristId,jdbcType=INTEGER}
-      )
+    insert into alarm (id, number, name, 
+      phone, gender, create_time, 
+      result, admin_id, deal_time, 
+      content)
+    values (#{id,jdbcType=INTEGER}, #{number,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, 
+      #{phone,jdbcType=VARCHAR}, #{gender,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, 
+      #{result,jdbcType=VARCHAR}, #{adminId,jdbcType=INTEGER}, #{dealTime,jdbcType=TIMESTAMP}, 
+      #{content,jdbcType=LONGVARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.tourism.model.Alarm">
     insert into alarm
@@ -105,11 +145,20 @@
       <if test="id != null">
         id,
       </if>
-      <if test="content != null">
-        content,
+      <if test="number != null">
+        number,
       </if>
-      <if test="time != null">
-        time,
+      <if test="name != null">
+        name,
+      </if>
+      <if test="phone != null">
+        phone,
+      </if>
+      <if test="gender != null">
+        gender,
+      </if>
+      <if test="createTime != null">
+        create_time,
       </if>
       <if test="result != null">
         result,
@@ -117,19 +166,31 @@
       <if test="adminId != null">
         admin_id,
       </if>
-      <if test="touristId != null">
-        tourist_id,
+      <if test="dealTime != null">
+        deal_time,
+      </if>
+      <if test="content != null">
+        content,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="id != null">
         #{id,jdbcType=INTEGER},
       </if>
-      <if test="content != null">
-        #{content,jdbcType=VARCHAR},
+      <if test="number != null">
+        #{number,jdbcType=VARCHAR},
       </if>
-      <if test="time != null">
-        #{time,jdbcType=TIMESTAMP},
+      <if test="name != null">
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="phone != null">
+        #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="gender != null">
+        #{gender,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
       </if>
       <if test="result != null">
         #{result,jdbcType=VARCHAR},
@@ -137,8 +198,11 @@
       <if test="adminId != null">
         #{adminId,jdbcType=INTEGER},
       </if>
-      <if test="touristId != null">
-        #{touristId,jdbcType=INTEGER},
+      <if test="dealTime != null">
+        #{dealTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="content != null">
+        #{content,jdbcType=LONGVARCHAR},
       </if>
     </trim>
   </insert>
@@ -154,11 +218,20 @@
       <if test="record.id != null">
         id = #{record.id,jdbcType=INTEGER},
       </if>
-      <if test="record.content != null">
-        content = #{record.content,jdbcType=VARCHAR},
+      <if test="record.number != null">
+        number = #{record.number,jdbcType=VARCHAR},
       </if>
-      <if test="record.time != null">
-        time = #{record.time,jdbcType=TIMESTAMP},
+      <if test="record.name != null">
+        name = #{record.name,jdbcType=VARCHAR},
+      </if>
+      <if test="record.phone != null">
+        phone = #{record.phone,jdbcType=VARCHAR},
+      </if>
+      <if test="record.gender != null">
+        gender = #{record.gender,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createTime != null">
+        create_time = #{record.createTime,jdbcType=TIMESTAMP},
       </if>
       <if test="record.result != null">
         result = #{record.result,jdbcType=VARCHAR},
@@ -166,10 +239,29 @@
       <if test="record.adminId != null">
         admin_id = #{record.adminId,jdbcType=INTEGER},
       </if>
-      <if test="record.touristId != null">
-        tourist_id = #{record.touristId,jdbcType=INTEGER},
+      <if test="record.dealTime != null">
+        deal_time = #{record.dealTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.content != null">
+        content = #{record.content,jdbcType=LONGVARCHAR},
       </if>
     </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExampleWithBLOBs" parameterType="map">
+    update alarm
+    set id = #{record.id,jdbcType=INTEGER},
+      number = #{record.number,jdbcType=VARCHAR},
+      name = #{record.name,jdbcType=VARCHAR},
+      phone = #{record.phone,jdbcType=VARCHAR},
+      gender = #{record.gender,jdbcType=VARCHAR},
+      create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      result = #{record.result,jdbcType=VARCHAR},
+      admin_id = #{record.adminId,jdbcType=INTEGER},
+      deal_time = #{record.dealTime,jdbcType=TIMESTAMP},
+      content = #{record.content,jdbcType=LONGVARCHAR}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -177,13 +269,74 @@
   <update id="updateByExample" parameterType="map">
     update alarm
     set id = #{record.id,jdbcType=INTEGER},
-      content = #{record.content,jdbcType=VARCHAR},
-      time = #{record.time,jdbcType=TIMESTAMP},
+      number = #{record.number,jdbcType=VARCHAR},
+      name = #{record.name,jdbcType=VARCHAR},
+      phone = #{record.phone,jdbcType=VARCHAR},
+      gender = #{record.gender,jdbcType=VARCHAR},
+      create_time = #{record.createTime,jdbcType=TIMESTAMP},
       result = #{record.result,jdbcType=VARCHAR},
       admin_id = #{record.adminId,jdbcType=INTEGER},
-      tourist_id = #{record.touristId,jdbcType=INTEGER}
+      deal_time = #{record.dealTime,jdbcType=TIMESTAMP}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.tourism.model.Alarm">
+    update alarm
+    <set>
+      <if test="number != null">
+        number = #{number,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null">
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="phone != null">
+        phone = #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="gender != null">
+        gender = #{gender,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="result != null">
+        result = #{result,jdbcType=VARCHAR},
+      </if>
+      <if test="adminId != null">
+        admin_id = #{adminId,jdbcType=INTEGER},
+      </if>
+      <if test="dealTime != null">
+        deal_time = #{dealTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="content != null">
+        content = #{content,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.tourism.model.Alarm">
+    update alarm
+    set number = #{number,jdbcType=VARCHAR},
+      name = #{name,jdbcType=VARCHAR},
+      phone = #{phone,jdbcType=VARCHAR},
+      gender = #{gender,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      result = #{result,jdbcType=VARCHAR},
+      admin_id = #{adminId,jdbcType=INTEGER},
+      deal_time = #{dealTime,jdbcType=TIMESTAMP},
+      content = #{content,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.tourism.model.Alarm">
+    update alarm
+    set number = #{number,jdbcType=VARCHAR},
+      name = #{name,jdbcType=VARCHAR},
+      phone = #{phone,jdbcType=VARCHAR},
+      gender = #{gender,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      result = #{result,jdbcType=VARCHAR},
+      admin_id = #{adminId,jdbcType=INTEGER},
+      deal_time = #{dealTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
   </update>
 </mapper>

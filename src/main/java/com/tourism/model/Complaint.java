@@ -5,15 +5,23 @@ import java.util.Date;
 public class Complaint {
     private Integer id;
 
-    private String content;
+    private String number;
 
-    private Date time;
+    private String name;
+
+    private String phone;
+
+    private String gender;
+
+    private Date createTime;
 
     private String result;
 
+    private Date dealTime;
+
     private Integer adminId;
 
-    private Integer touristId;
+    private String content;
 
     public Integer getId() {
         return id;
@@ -23,20 +31,44 @@ public class Complaint {
         this.id = id;
     }
 
-    public String getContent() {
-        return content;
+    public String getNumber() {
+        return number;
     }
 
-    public void setContent(String content) {
-        this.content = content == null ? null : content.trim();
+    public void setNumber(String number) {
+        this.number = number == null ? null : number.trim();
     }
 
-    public Date getTime() {
-        return time;
+    public String getName() {
+        return name;
     }
 
-    public void setTime(Date time) {
-        this.time = time;
+    public void setName(String name) {
+        this.name = name == null ? null : name.trim();
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone == null ? null : phone.trim();
+    }
+
+    public String getGender() {
+        return gender;
+    }
+
+    public void setGender(String gender) {
+        this.gender = gender == null ? null : gender.trim();
+    }
+
+    public Date getCreateTime() {
+        return createTime;
+    }
+
+    public void setCreateTime(Date createTime) {
+        this.createTime = createTime;
     }
 
     public String getResult() {
@@ -47,6 +79,14 @@ public class Complaint {
         this.result = result == null ? null : result.trim();
     }
 
+    public Date getDealTime() {
+        return dealTime;
+    }
+
+    public void setDealTime(Date dealTime) {
+        this.dealTime = dealTime;
+    }
+
     public Integer getAdminId() {
         return adminId;
     }
@@ -55,11 +95,11 @@ public class Complaint {
         this.adminId = adminId;
     }
 
-    public Integer getTouristId() {
-        return touristId;
+    public String getContent() {
+        return content;
     }
 
-    public void setTouristId(Integer touristId) {
-        this.touristId = touristId;
+    public void setContent(String content) {
+        this.content = content == null ? null : content.trim();
     }
 }

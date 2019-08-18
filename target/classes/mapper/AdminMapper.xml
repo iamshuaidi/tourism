@@ -2,8 +2,9 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.tourism.dao.AdminMapper">
   <resultMap id="BaseResultMap" type="com.tourism.model.Admin">
-    <result column="id" jdbcType="INTEGER" property="id" />
+    <id column="id" jdbcType="INTEGER" property="id" />
     <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="nickname" jdbcType="VARCHAR" property="nickname" />
     <result column="pwd" jdbcType="VARCHAR" property="pwd" />
     <result column="salt" jdbcType="VARCHAR" property="salt" />
     <result column="phone" jdbcType="VARCHAR" property="phone" />
@@ -69,7 +70,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    id, name, pwd, salt, phone, id_num, avatar_url
+    id, name, nickname, pwd, salt, phone, id_num, avatar_url
   </sql>
   <select id="selectByExample" parameterType="com.tourism.model.AdminExample" resultMap="BaseResultMap">
     select
@@ -86,6 +87,16 @@
       order by ${orderByClause}
     </if>
   </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from admin
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from admin
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
   <delete id="deleteByExample" parameterType="com.tourism.model.AdminExample">
     delete from admin
     <if test="_parameter != null">
@@ -93,11 +104,11 @@
     </if>
   </delete>
   <insert id="insert" parameterType="com.tourism.model.Admin">
-    insert into admin (id, name, pwd, 
-      salt, phone, id_num, 
+    insert into admin (id, name, nickname, 
+      pwd, salt, phone, id_num, 
       avatar_url)
-    values (#{id,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{pwd,jdbcType=VARCHAR}, 
-      #{salt,jdbcType=VARCHAR}, #{phone,jdbcType=VARCHAR}, #{idNum,jdbcType=INTEGER}, 
+    values (#{id,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{nickname,jdbcType=VARCHAR}, 
+      #{pwd,jdbcType=VARCHAR}, #{salt,jdbcType=VARCHAR}, #{phone,jdbcType=VARCHAR}, #{idNum,jdbcType=INTEGER}, 
       #{avatarUrl,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.tourism.model.Admin">
@@ -108,6 +119,9 @@
       </if>
       <if test="name != null">
         name,
+      </if>
+      <if test="nickname != null">
+        nickname,
       </if>
       <if test="pwd != null">
         pwd,
@@ -131,6 +145,9 @@
       </if>
       <if test="name != null">
         #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="nickname != null">
+        #{nickname,jdbcType=VARCHAR},
       </if>
       <if test="pwd != null">
         #{pwd,jdbcType=VARCHAR},
@@ -164,6 +181,9 @@
       <if test="record.name != null">
         name = #{record.name,jdbcType=VARCHAR},
       </if>
+      <if test="record.nickname != null">
+        nickname = #{record.nickname,jdbcType=VARCHAR},
+      </if>
       <if test="record.pwd != null">
         pwd = #{record.pwd,jdbcType=VARCHAR},
       </if>
@@ -188,6 +208,7 @@
     update admin
     set id = #{record.id,jdbcType=INTEGER},
       name = #{record.name,jdbcType=VARCHAR},
+      nickname = #{record.nickname,jdbcType=VARCHAR},
       pwd = #{record.pwd,jdbcType=VARCHAR},
       salt = #{record.salt,jdbcType=VARCHAR},
       phone = #{record.phone,jdbcType=VARCHAR},
@@ -196,5 +217,43 @@
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.tourism.model.Admin">
+    update admin
+    <set>
+      <if test="name != null">
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="nickname != null">
+        nickname = #{nickname,jdbcType=VARCHAR},
+      </if>
+      <if test="pwd != null">
+        pwd = #{pwd,jdbcType=VARCHAR},
+      </if>
+      <if test="salt != null">
+        salt = #{salt,jdbcType=VARCHAR},
+      </if>
+      <if test="phone != null">
+        phone = #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="idNum != null">
+        id_num = #{idNum,jdbcType=INTEGER},
+      </if>
+      <if test="avatarUrl != null">
+        avatar_url = #{avatarUrl,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.tourism.model.Admin">
+    update admin
+    set name = #{name,jdbcType=VARCHAR},
+      nickname = #{nickname,jdbcType=VARCHAR},
+      pwd = #{pwd,jdbcType=VARCHAR},
+      salt = #{salt,jdbcType=VARCHAR},
+      phone = #{phone,jdbcType=VARCHAR},
+      id_num = #{idNum,jdbcType=INTEGER},
+      avatar_url = #{avatarUrl,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
   </update>
 </mapper>

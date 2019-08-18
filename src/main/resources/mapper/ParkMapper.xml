@@ -2,9 +2,12 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.tourism.dao.ParkMapper">
   <resultMap id="BaseResultMap" type="com.tourism.model.Park">
-    <result column="id" jdbcType="INTEGER" property="id" />
+    <id column="id" jdbcType="INTEGER" property="id" />
     <result column="name" jdbcType="VARCHAR" property="name" />
     <result column="vacancy" jdbcType="INTEGER" property="vacancy" />
+    <result column="distance" jdbcType="DOUBLE" property="distance" />
+    <result column="fee" jdbcType="DOUBLE" property="fee" />
+    <result column="image_url" jdbcType="VARCHAR" property="imageUrl" />
   </resultMap>
   <sql id="Example_Where_Clause">
     <where>
@@ -65,7 +68,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    id, name, vacancy
+    id, name, vacancy, distance, fee, image_url
   </sql>
   <select id="selectByExample" parameterType="com.tourism.model.ParkExample" resultMap="BaseResultMap">
     select
@@ -82,6 +85,16 @@
       order by ${orderByClause}
     </if>
   </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from park
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from park
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
   <delete id="deleteByExample" parameterType="com.tourism.model.ParkExample">
     delete from park
     <if test="_parameter != null">
@@ -89,9 +102,11 @@
     </if>
   </delete>
   <insert id="insert" parameterType="com.tourism.model.Park">
-    insert into park (id, name, vacancy
+    insert into park (id, name, vacancy, 
+      distance, fee, image_url
       )
-    values (#{id,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{vacancy,jdbcType=INTEGER}
+    values (#{id,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{vacancy,jdbcType=INTEGER}, 
+      #{distance,jdbcType=DOUBLE}, #{fee,jdbcType=DOUBLE}, #{imageUrl,jdbcType=VARCHAR}
       )
   </insert>
   <insert id="insertSelective" parameterType="com.tourism.model.Park">
@@ -106,6 +121,15 @@
       <if test="vacancy != null">
         vacancy,
       </if>
+      <if test="distance != null">
+        distance,
+      </if>
+      <if test="fee != null">
+        fee,
+      </if>
+      <if test="imageUrl != null">
+        image_url,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="id != null">
@@ -116,6 +140,15 @@
       </if>
       <if test="vacancy != null">
         #{vacancy,jdbcType=INTEGER},
+      </if>
+      <if test="distance != null">
+        #{distance,jdbcType=DOUBLE},
+      </if>
+      <if test="fee != null">
+        #{fee,jdbcType=DOUBLE},
+      </if>
+      <if test="imageUrl != null">
+        #{imageUrl,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
@@ -137,6 +170,15 @@
       <if test="record.vacancy != null">
         vacancy = #{record.vacancy,jdbcType=INTEGER},
       </if>
+      <if test="record.distance != null">
+        distance = #{record.distance,jdbcType=DOUBLE},
+      </if>
+      <if test="record.fee != null">
+        fee = #{record.fee,jdbcType=DOUBLE},
+      </if>
+      <if test="record.imageUrl != null">
+        image_url = #{record.imageUrl,jdbcType=VARCHAR},
+      </if>
     </set>
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
@@ -146,9 +188,42 @@
     update park
     set id = #{record.id,jdbcType=INTEGER},
       name = #{record.name,jdbcType=VARCHAR},
-      vacancy = #{record.vacancy,jdbcType=INTEGER}
+      vacancy = #{record.vacancy,jdbcType=INTEGER},
+      distance = #{record.distance,jdbcType=DOUBLE},
+      fee = #{record.fee,jdbcType=DOUBLE},
+      image_url = #{record.imageUrl,jdbcType=VARCHAR}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.tourism.model.Park">
+    update park
+    <set>
+      <if test="name != null">
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="vacancy != null">
+        vacancy = #{vacancy,jdbcType=INTEGER},
+      </if>
+      <if test="distance != null">
+        distance = #{distance,jdbcType=DOUBLE},
+      </if>
+      <if test="fee != null">
+        fee = #{fee,jdbcType=DOUBLE},
+      </if>
+      <if test="imageUrl != null">
+        image_url = #{imageUrl,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.tourism.model.Park">
+    update park
+    set name = #{name,jdbcType=VARCHAR},
+      vacancy = #{vacancy,jdbcType=INTEGER},
+      distance = #{distance,jdbcType=DOUBLE},
+      fee = #{fee,jdbcType=DOUBLE},
+      image_url = #{imageUrl,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
   </update>
 </mapper>

@@ -7,6 +7,12 @@ public class Park {
 
     private Integer vacancy;
 
+    private Double distance;
+
+    private Double fee;
+
+    private String imageUrl;
+
     public Integer getId() {
         return id;
     }
@@ -29,5 +35,29 @@ public class Park {
 
     public void setVacancy(Integer vacancy) {
         this.vacancy = vacancy;
+    }
+
+    public Double getDistance() {
+        return distance;
+    }
+
+    public void setDistance(Double distance) {
+        this.distance = distance;
+    }
+
+    public Double getFee() {
+        return fee;
+    }
+
+    public void setFee(Double fee) {
+        this.fee = fee;
+    }
+
+    public String getImageUrl() {
+        return imageUrl;
+    }
+
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl == null ? null : imageUrl.trim();
     }
 }

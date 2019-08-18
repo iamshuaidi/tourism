@@ -2,12 +2,12 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.tourism.dao.CookieMapper">
   <resultMap id="BaseResultMap" type="com.tourism.model.Cookie">
-    <result column="id" jdbcType="INTEGER" property="id" />
+    <id column="id" jdbcType="INTEGER" property="id" />
     <result column="cookie" jdbcType="VARCHAR" property="cookie" />
     <result column="cookie_status" jdbcType="TINYINT" property="cookieStatus" />
     <result column="login_time" jdbcType="TIMESTAMP" property="loginTime" />
     <result column="valid_time" jdbcType="TIMESTAMP" property="validTime" />
-    <result column="user_id" jdbcType="INTEGER" property="userId" />
+    <result column="admin_id" jdbcType="INTEGER" property="adminId" />
   </resultMap>
   <sql id="Example_Where_Clause">
     <where>
@@ -68,7 +68,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    id, cookie, cookie_status, login_time, valid_time, user_id
+    id, cookie, cookie_status, login_time, valid_time, admin_id
   </sql>
   <select id="selectByExample" parameterType="com.tourism.model.CookieExample" resultMap="BaseResultMap">
     select
@@ -85,6 +85,16 @@
       order by ${orderByClause}
     </if>
   </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from cookie
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from cookie
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
   <delete id="deleteByExample" parameterType="com.tourism.model.CookieExample">
     delete from cookie
     <if test="_parameter != null">
@@ -93,10 +103,10 @@
   </delete>
   <insert id="insert" parameterType="com.tourism.model.Cookie">
     insert into cookie (id, cookie, cookie_status, 
-      login_time, valid_time, user_id
+      login_time, valid_time, admin_id
       )
     values (#{id,jdbcType=INTEGER}, #{cookie,jdbcType=VARCHAR}, #{cookieStatus,jdbcType=TINYINT}, 
-      #{loginTime,jdbcType=TIMESTAMP}, #{validTime,jdbcType=TIMESTAMP}, #{userId,jdbcType=INTEGER}
+      #{loginTime,jdbcType=TIMESTAMP}, #{validTime,jdbcType=TIMESTAMP}, #{adminId,jdbcType=INTEGER}
       )
   </insert>
   <insert id="insertSelective" parameterType="com.tourism.model.Cookie">
@@ -117,8 +127,8 @@
       <if test="validTime != null">
         valid_time,
       </if>
-      <if test="userId != null">
-        user_id,
+      <if test="adminId != null">
+        admin_id,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
@@ -137,8 +147,8 @@
       <if test="validTime != null">
         #{validTime,jdbcType=TIMESTAMP},
       </if>
-      <if test="userId != null">
-        #{userId,jdbcType=INTEGER},
+      <if test="adminId != null">
+        #{adminId,jdbcType=INTEGER},
       </if>
     </trim>
   </insert>
@@ -166,8 +176,8 @@
       <if test="record.validTime != null">
         valid_time = #{record.validTime,jdbcType=TIMESTAMP},
       </if>
-      <if test="record.userId != null">
-        user_id = #{record.userId,jdbcType=INTEGER},
+      <if test="record.adminId != null">
+        admin_id = #{record.adminId,jdbcType=INTEGER},
       </if>
     </set>
     <if test="_parameter != null">
@@ -181,9 +191,39 @@
       cookie_status = #{record.cookieStatus,jdbcType=TINYINT},
       login_time = #{record.loginTime,jdbcType=TIMESTAMP},
       valid_time = #{record.validTime,jdbcType=TIMESTAMP},
-      user_id = #{record.userId,jdbcType=INTEGER}
+      admin_id = #{record.adminId,jdbcType=INTEGER}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.tourism.model.Cookie">
+    update cookie
+    <set>
+      <if test="cookie != null">
+        cookie = #{cookie,jdbcType=VARCHAR},
+      </if>
+      <if test="cookieStatus != null">
+        cookie_status = #{cookieStatus,jdbcType=TINYINT},
+      </if>
+      <if test="loginTime != null">
+        login_time = #{loginTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="validTime != null">
+        valid_time = #{validTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="adminId != null">
+        admin_id = #{adminId,jdbcType=INTEGER},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.tourism.model.Cookie">
+    update cookie
+    set cookie = #{cookie,jdbcType=VARCHAR},
+      cookie_status = #{cookieStatus,jdbcType=TINYINT},
+      login_time = #{loginTime,jdbcType=TIMESTAMP},
+      valid_time = #{validTime,jdbcType=TIMESTAMP},
+      admin_id = #{adminId,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER}
   </update>
 </mapper>
