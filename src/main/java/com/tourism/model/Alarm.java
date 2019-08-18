@@ -13,6 +13,8 @@ public class Alarm {
 
     private String gender;
 
+    private String content;
+
     private Date createTime;
 
     private String result;
@@ -20,8 +22,6 @@ public class Alarm {
     private Integer adminId;
 
     private Date dealTime;
-
-    private String content;
 
     public Integer getId() {
         return id;
@@ -63,6 +63,14 @@ public class Alarm {
         this.gender = gender == null ? null : gender.trim();
     }
 
+    public String getContent() {
+        return content;
+    }
+
+    public void setContent(String content) {
+        this.content = content == null ? null : content.trim();
+    }
+
     public Date getCreateTime() {
         return createTime;
     }
@@ -93,13 +101,5 @@ public class Alarm {
 
     public void setDealTime(Date dealTime) {
         this.dealTime = dealTime;
-    }
-
-    public String getContent() {
-        return content;
-    }
-
-    public void setContent(String content) {
-        this.content = content == null ? null : content.trim();
     }
 }
