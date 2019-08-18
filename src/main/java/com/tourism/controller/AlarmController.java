@@ -84,11 +84,11 @@ public class AlarmController {
     @CrossOrigin
     @RequestMapping(value = "replyAlarm")
     public void replyAlarm(@RequestParam("result") String result,
-                               @RequestParam("cid")String id){
+                               @RequestParam("cid")String id, @RequestParam("aid") String aid){
         Alarm alarm = alarmService.queryAlarmById(Integer.parseInt(id));
         alarm.setResult(result);
         alarm.setDealTime(new Date());
-        alarm.setAdminId(1);//暂时这样处理管理员编号
+        alarm.setAdminId(Integer.parseInt(aid));//暂时这样处理管理员编号
         alarmService.updateAlarm(alarm);
     }
 }
