@@ -28,7 +28,7 @@ public class DisaterManagermentController {
     WarningService warningService;
 
     //新增应急预案
-    @CrossOrigin
+    @CrossOrigin(origins = "http://localhost:8080", maxAge = 3600)
     @RequestMapping(path = "/addPlan", method = RequestMethod.GET)
     @ResponseBody
     public String addPlan(Model model, @RequestParam("type") String type,
@@ -45,7 +45,7 @@ public class DisaterManagermentController {
     }
 
     //编辑应急预案
-    @CrossOrigin
+    @CrossOrigin(origins = "http://localhost:8080", maxAge = 3600)
     @RequestMapping(path = "/editPlan", method = RequestMethod.GET)
     @ResponseBody
     public String editPlan(Model model, @RequestParam("id") Integer id, @RequestParam("type") String type,
@@ -65,7 +65,7 @@ public class DisaterManagermentController {
     //删除应急预案
 
     //新增应急人员
-    @CrossOrigin
+    @CrossOrigin(origins = "http://localhost:8080", maxAge = 3600)
     @RequestMapping(path = "/addPerson", method = RequestMethod.GET)
     @ResponseBody
     public String addPerson(Model model, @RequestParam("name") String name,
@@ -82,7 +82,7 @@ public class DisaterManagermentController {
     }
 
     //删除应急人员分配
-    @CrossOrigin
+    @CrossOrigin(origins = "http://localhost:8080", maxAge = 3600)
     @RequestMapping(path = "/deletePerson", method = RequestMethod.GET)
     @ResponseBody
     public String deletePerson(Model model, @RequestParam("name") String name,
@@ -99,7 +99,7 @@ public class DisaterManagermentController {
     }
 
     //分配应急预案给个人
-    @CrossOrigin
+    @CrossOrigin(origins = "http://localhost:8080", maxAge = 3600)
     @RequestMapping(path = "/assignPlan", method = RequestMethod.GET)
     @ResponseBody
     public String assignPlan(Model model, @RequestParam("planID")Integer planId,
@@ -116,7 +116,7 @@ public class DisaterManagermentController {
     }
 
     //向前端首页发送预警列表
-    @CrossOrigin
+    @CrossOrigin(origins = "http://localhost:8080", maxAge = 3600)
     @RequestMapping(path = "/sendWarning", method = RequestMethod.POST)
     @ResponseBody
     public String sendWarning(Model model, @RequestParam("id")Integer id,
@@ -137,7 +137,7 @@ public class DisaterManagermentController {
     }
 
     //前端发布预警，同时写入后台数据库作为新纪录
-    @CrossOrigin
+    @CrossOrigin(origins = "http://localhost:8080", maxAge = 3600)
     @RequestMapping(path = "/createWarning", method = RequestMethod.GET)
     @ResponseBody
     public String createWarning(Model model, @RequestParam("id")Integer id,
