@@ -7,13 +7,11 @@
     <result column="name" jdbcType="VARCHAR" property="name" />
     <result column="phone" jdbcType="VARCHAR" property="phone" />
     <result column="gender" jdbcType="VARCHAR" property="gender" />
+    <result column="content" jdbcType="VARCHAR" property="content" />
     <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
     <result column="result" jdbcType="VARCHAR" property="result" />
     <result column="deal_time" jdbcType="TIMESTAMP" property="dealTime" />
     <result column="admin_id" jdbcType="INTEGER" property="adminId" />
-  </resultMap>
-  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.tourism.model.Complaint">
-    <result column="content" jdbcType="LONGVARCHAR" property="content" />
   </resultMap>
   <sql id="Example_Where_Clause">
     <where>
@@ -74,28 +72,8 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    id, number, name, phone, gender, create_time, result, deal_time, admin_id
+    id, number, name, phone, gender, content, create_time, result, deal_time, admin_id
   </sql>
-  <sql id="Blob_Column_List">
-    content
-  </sql>
-  <select id="selectByExampleWithBLOBs" parameterType="com.tourism.model.ComplaintExample" resultMap="ResultMapWithBLOBs">
-    select
-    <if test="distinct">
-      distinct
-    </if>
-    'true' as QUERYID,
-    <include refid="Base_Column_List" />
-    ,
-    <include refid="Blob_Column_List" />
-    from complaint
-    <if test="_parameter != null">
-      <include refid="Example_Where_Clause" />
-    </if>
-    <if test="orderByClause != null">
-      order by ${orderByClause}
-    </if>
-  </select>
   <select id="selectByExample" parameterType="com.tourism.model.ComplaintExample" resultMap="BaseResultMap">
     select
     <if test="distinct">
@@ -111,11 +89,9 @@
       order by ${orderByClause}
     </if>
   </select>
-  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="ResultMapWithBLOBs">
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
-    ,
-    <include refid="Blob_Column_List" />
     from complaint
     where id = #{id,jdbcType=INTEGER}
   </select>
@@ -129,15 +105,15 @@
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="com.tourism.model.Complaint">
+  <insert id="insert" parameterType="com.tourism.model.Complaint" useGeneratedKeys="true" keyProperty="id">
     insert into complaint (id, number, name, 
-      phone, gender, create_time, 
-      result, deal_time, admin_id, 
-      content)
+      phone, gender, content, 
+      create_time, result, deal_time, 
+      admin_id)
     values (#{id,jdbcType=INTEGER}, #{number,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, 
-      #{phone,jdbcType=VARCHAR}, #{gender,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, 
-      #{result,jdbcType=VARCHAR}, #{dealTime,jdbcType=TIMESTAMP}, #{adminId,jdbcType=INTEGER}, 
-      #{content,jdbcType=LONGVARCHAR})
+      #{phone,jdbcType=VARCHAR}, #{gender,jdbcType=VARCHAR}, #{content,jdbcType=VARCHAR}, 
+      #{createTime,jdbcType=TIMESTAMP}, #{result,jdbcType=VARCHAR}, #{dealTime,jdbcType=TIMESTAMP}, 
+      #{adminId,jdbcType=INTEGER})
   </insert>
   <insert id="insertSelective" parameterType="com.tourism.model.Complaint">
     insert into complaint
@@ -157,6 +133,9 @@
       <if test="gender != null">
         gender,
       </if>
+      <if test="content != null">
+        content,
+      </if>
       <if test="createTime != null">
         create_time,
       </if>
@@ -168,9 +147,6 @@
       </if>
       <if test="adminId != null">
         admin_id,
-      </if>
-      <if test="content != null">
-        content,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
@@ -189,6 +165,9 @@
       <if test="gender != null">
         #{gender,jdbcType=VARCHAR},
       </if>
+      <if test="content != null">
+        #{content,jdbcType=VARCHAR},
+      </if>
       <if test="createTime != null">
         #{createTime,jdbcType=TIMESTAMP},
       </if>
@@ -200,9 +179,6 @@
       </if>
       <if test="adminId != null">
         #{adminId,jdbcType=INTEGER},
-      </if>
-      <if test="content != null">
-        #{content,jdbcType=LONGVARCHAR},
       </if>
     </trim>
   </insert>
@@ -230,6 +206,9 @@
       <if test="record.gender != null">
         gender = #{record.gender,jdbcType=VARCHAR},
       </if>
+      <if test="record.content != null">
+        content = #{record.content,jdbcType=VARCHAR},
+      </if>
       <if test="record.createTime != null">
         create_time = #{record.createTime,jdbcType=TIMESTAMP},
       </if>
@@ -242,26 +221,7 @@
       <if test="record.adminId != null">
         admin_id = #{record.adminId,jdbcType=INTEGER},
       </if>
-      <if test="record.content != null">
-        content = #{record.content,jdbcType=LONGVARCHAR},
-      </if>
     </set>
-    <if test="_parameter != null">
-      <include refid="Update_By_Example_Where_Clause" />
-    </if>
-  </update>
-  <update id="updateByExampleWithBLOBs" parameterType="map">
-    update complaint
-    set id = #{record.id,jdbcType=INTEGER},
-      number = #{record.number,jdbcType=VARCHAR},
-      name = #{record.name,jdbcType=VARCHAR},
-      phone = #{record.phone,jdbcType=VARCHAR},
-      gender = #{record.gender,jdbcType=VARCHAR},
-      create_time = #{record.createTime,jdbcType=TIMESTAMP},
-      result = #{record.result,jdbcType=VARCHAR},
-      deal_time = #{record.dealTime,jdbcType=TIMESTAMP},
-      admin_id = #{record.adminId,jdbcType=INTEGER},
-      content = #{record.content,jdbcType=LONGVARCHAR}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -273,6 +233,7 @@
       name = #{record.name,jdbcType=VARCHAR},
       phone = #{record.phone,jdbcType=VARCHAR},
       gender = #{record.gender,jdbcType=VARCHAR},
+      content = #{record.content,jdbcType=VARCHAR},
       create_time = #{record.createTime,jdbcType=TIMESTAMP},
       result = #{record.result,jdbcType=VARCHAR},
       deal_time = #{record.dealTime,jdbcType=TIMESTAMP},
@@ -296,6 +257,9 @@
       <if test="gender != null">
         gender = #{gender,jdbcType=VARCHAR},
       </if>
+      <if test="content != null">
+        content = #{content,jdbcType=VARCHAR},
+      </if>
       <if test="createTime != null">
         create_time = #{createTime,jdbcType=TIMESTAMP},
       </if>
@@ -308,23 +272,7 @@
       <if test="adminId != null">
         admin_id = #{adminId,jdbcType=INTEGER},
       </if>
-      <if test="content != null">
-        content = #{content,jdbcType=LONGVARCHAR},
-      </if>
     </set>
-    where id = #{id,jdbcType=INTEGER}
-  </update>
-  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.tourism.model.Complaint">
-    update complaint
-    set number = #{number,jdbcType=VARCHAR},
-      name = #{name,jdbcType=VARCHAR},
-      phone = #{phone,jdbcType=VARCHAR},
-      gender = #{gender,jdbcType=VARCHAR},
-      create_time = #{createTime,jdbcType=TIMESTAMP},
-      result = #{result,jdbcType=VARCHAR},
-      deal_time = #{dealTime,jdbcType=TIMESTAMP},
-      admin_id = #{adminId,jdbcType=INTEGER},
-      content = #{content,jdbcType=LONGVARCHAR}
     where id = #{id,jdbcType=INTEGER}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.tourism.model.Complaint">
@@ -333,6 +281,7 @@
       name = #{name,jdbcType=VARCHAR},
       phone = #{phone,jdbcType=VARCHAR},
       gender = #{gender,jdbcType=VARCHAR},
+      content = #{content,jdbcType=VARCHAR},
       create_time = #{createTime,jdbcType=TIMESTAMP},
       result = #{result,jdbcType=VARCHAR},
       deal_time = #{dealTime,jdbcType=TIMESTAMP},
