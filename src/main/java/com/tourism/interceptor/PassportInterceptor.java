@@ -2,7 +2,7 @@ package com.tourism.interceptor;
 
 import com.tourism.model.Admin;
 import com.tourism.model.HostHolder;
-import com.tourism.service.AdminService;
+import com.tourism.service.LoginService;
 import com.tourism.service.CookieService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -24,7 +24,7 @@ public class PassportInterceptor implements HandlerInterceptor {
     private CookieService cookieService;
 
     @Autowired
-    private AdminService adminService;
+    private LoginService loginService;
 
     @Autowired
     private HostHolder hostHolder;
@@ -50,7 +50,7 @@ public class PassportInterceptor implements HandlerInterceptor {
                 return true;
             }
 
-            Admin admin = adminService.findById(cookie.getAdminId());
+            Admin admin = loginService.findById(cookie.getAdminId());
             hostHolder.setUser(admin);
         }
         return true;

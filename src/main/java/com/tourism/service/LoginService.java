@@ -4,7 +4,7 @@ import com.tourism.model.Admin;
 
 import java.util.Map;
 
-public interface AdminService {
+public interface LoginService {
 
     Map<String, Object> login(String phone, String password);
 

@@ -2,7 +2,7 @@ package com.tourism.controller;
 
 
 import com.alibaba.fastjson.JSONObject;
-import com.tourism.service.AdminService;
+import com.tourism.service.LoginService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -15,7 +15,7 @@ import java.util.Map;
 public class LoginController {
 
     @Autowired
-    AdminService adminService;
+    LoginService loginService;
 
 
 
@@ -26,7 +26,7 @@ public class LoginController {
     public String login(@RequestParam("phone") String phone, @RequestParam("password") String password,
                         HttpServletResponse response) {
 
-        Map<String, Object> map =  adminService.login(phone, password);
+        Map<String, Object> map =  loginService.login(phone, password);
         if(!map.containsKey("cookie")){
             return JSONObject.toJSONString(map);
         }
@@ -45,7 +45,7 @@ public class LoginController {
 
     @RequestMapping(path = {"/logout"}, method = {RequestMethod.GET, RequestMethod.POST})
     public String logout(@CookieValue("cookie") String cookie) {
-        Map<String, Object> map = adminService.logout(cookie);
+        Map<String, Object> map = loginService.logout(cookie);
         return JSONObject.toJSONString(map);
     }
 }

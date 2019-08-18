@@ -4,7 +4,7 @@ import com.tourism.dao.AdminMapper;
 import com.tourism.model.Admin;
 import com.tourism.model.AdminExample;
 import com.tourism.model.Cookie;
-import com.tourism.service.AdminService;
+import com.tourism.service.LoginService;
 import com.tourism.service.CookieService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -12,7 +12,7 @@ import org.springframework.stereotype.Service;
 import java.util.*;
 
 @Service
-public class AdminServiceImpl implements AdminService {
+public class LoginServiceImpl implements LoginService {
 
     @Autowired
     AdminMapper adminMapper;

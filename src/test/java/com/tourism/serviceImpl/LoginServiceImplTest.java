@@ -1,7 +1,7 @@
 package com.tourism.serviceImpl;
 
 import com.tourism.model.Admin;
-import com.tourism.service.AdminService;
+import com.tourism.service.LoginService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mybatis.spring.annotation.MapperScan;
@@ -18,15 +18,15 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 @SpringBootApplication(scanBasePackages={"com.tourism.service",
         "com.tourism.controller", "com.tourism.serviceImpl"})
 @MapperScan("com.tourism.dao")
-public class AdminServiceImplTest {
+public class LoginServiceImplTest {
 
    // @Autowired
-    //AdminService adminService;
+    //LoginService adminService;
 
     @Test
     public void testLogin(){
-        AdminService adminService = new AdminServiceImpl();
-        Admin admin = adminService.findByPhone("123");
+        LoginService loginService = new LoginServiceImpl();
+        Admin admin = loginService.findByPhone("123");
         System.out.println(admin);
     }
 
