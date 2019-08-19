@@ -11,7 +11,7 @@
  Target Server Version : 50727
  File Encoding         : 65001
 
- Date: 19/08/2019 13:23:21
+ Date: 19/08/2019 13:58:55
 */
 
 SET NAMES utf8mb4;
@@ -112,7 +112,7 @@ CREATE TABLE `cookie` (
 -- Records of cookie
 -- ----------------------------
 BEGIN;
-INSERT INTO `cookie` VALUES (1, '39317bb5-5e1f-4a5a-a1ce-fc7352e0efd5', 0, '2019-08-19 13:10:30', '2019-08-20 13:10:30', 1);
+INSERT INTO `cookie` VALUES (1, '6eca2aaa-7f0b-460d-afbb-6287cc3ed444', 0, '2019-08-19 13:48:22', '2019-08-20 13:48:22', 1);
 COMMIT;
 
 -- ----------------------------
@@ -185,6 +185,7 @@ CREATE TABLE `per_emer` (
 -- Records of per_emer
 -- ----------------------------
 BEGIN;
+INSERT INTO `per_emer` VALUES (1, '张三', '12345123451', '男', '没工作');
 INSERT INTO `per_emer` VALUES (4, '33', '222', '男', '景区人员');
 COMMIT;
 
@@ -202,7 +203,15 @@ CREATE TABLE `per_plan` (
   KEY `fk2` (`plan_id`) USING BTREE,
   CONSTRAINT `fk1` FOREIGN KEY (`per_id`) REFERENCES `per_emer` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `fk2` FOREIGN KEY (`plan_id`) REFERENCES `plan_emer` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 ROW_FORMAT=COMPACT;
+
+-- ----------------------------
+-- Records of per_plan
+-- ----------------------------
+BEGIN;
+INSERT INTO `per_plan` VALUES (1, '2019-08-15 13:53:23', 1, 1);
+INSERT INTO `per_plan` VALUES (2, '2019-08-16 13:56:07', 1, 2);
+COMMIT;
 
 -- ----------------------------
 -- Table structure for plan_emer
@@ -217,7 +226,15 @@ CREATE TABLE `plan_emer` (
   PRIMARY KEY (`id`) USING BTREE,
   KEY `fk3` (`admin_id`) USING BTREE,
   CONSTRAINT `fk3` FOREIGN KEY (`admin_id`) REFERENCES `admin` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 ROW_FORMAT=COMPACT;
+
+-- ----------------------------
+-- Records of plan_emer
+-- ----------------------------
+BEGIN;
+INSERT INTO `plan_emer` VALUES (1, '极端天气', '出问题了 ', '计划', 1);
+INSERT INTO `plan_emer` VALUES (2, '不好的类型', '没有标题', '没计划', 1);
+COMMIT;
 
 -- ----------------------------
 -- Table structure for ticket
@@ -263,11 +280,11 @@ CREATE TABLE `warning` (
 -- Records of warning
 -- ----------------------------
 BEGIN;
-INSERT INTO `warning` VALUES (1, '极端天气', '大风来了', '我去，这大风，太恐怖了', '1', '2019-08-21 13:18:28', 1);
-INSERT INTO `warning` VALUES (2, '极端天气', '小风来了', '我去，这大风，太恐怖了', '1', '2019-08-13 13:19:00', 1);
-INSERT INTO `warning` VALUES (3, '极端天气', '冷风来了', '我去，这大风，太恐怖了，然而我并不怕', '1', '2019-08-15 13:19:17', 1);
-INSERT INTO `warning` VALUES (4, '极端天气', '狂风来了', '我去，这大风，太恐怖了，然而我并不怕', '1', '2019-08-16 13:19:30', 1);
-INSERT INTO `warning` VALUES (5, '极端天气', '没风来了', '我去，这大风，太恐怖了，然而我并不怕，怕啥，区区台风', '1', '2019-08-18 13:19:42', 1);
+INSERT INTO `warning` VALUES (1, '极端天气', '大风来了', '我去，这大风，太恐怖了', '停止预警', '2019-08-21 13:18:28', 1);
+INSERT INTO `warning` VALUES (2, '极端天气', '小风来了', '我去，这大风，太恐怖了', '停止预警', '2019-08-13 13:19:00', 1);
+INSERT INTO `warning` VALUES (3, '极端天气', '冷风来了', '我去，这大风，太恐怖了，然而我并不怕', '停止预警', '2019-08-15 13:19:17', 1);
+INSERT INTO `warning` VALUES (4, '极端天气', '狂风来了', '我去，这大风，太恐怖了，然而我并不怕', '停止预警', '2019-08-16 13:19:30', 1);
+INSERT INTO `warning` VALUES (5, '极端天气', '没风来了', '我去，这大风，太恐怖了，然而我并不怕，怕啥，区区台风', '停止预警', '2019-08-18 13:19:42', 1);
 COMMIT;
 
 SET FOREIGN_KEY_CHECKS = 1;
