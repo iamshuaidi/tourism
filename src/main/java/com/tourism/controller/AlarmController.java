@@ -88,7 +88,7 @@ public class AlarmController {
         Alarm alarm = alarmService.queryAlarmById(Integer.parseInt(id));
         alarm.setResult(result);
         alarm.setDealTime(new Date());
-        alarm.setAdminId(Integer.parseInt(aid));//暂时这样处理管理员编号
+        alarm.setAdminId(Integer.parseInt(aid));
         alarmService.updateAlarm(alarm);
     }
 }

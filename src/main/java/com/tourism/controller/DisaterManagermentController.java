@@ -5,7 +5,6 @@ import com.tourism.model.PerPlan;
 import com.tourism.model.PlanEmer;
 import com.tourism.model.Warning;
 import com.tourism.service.EmerService;
-import com.tourism.service.TestService;
 import com.tourism.service.WarningService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
@@ -17,10 +16,6 @@ import java.util.List;
 @RestController
 @RequestMapping("/")
 public class DisaterManagermentController {
-
-    @Autowired
-    TestService testService;
-
     @Autowired
     EmerService emerService;
 
