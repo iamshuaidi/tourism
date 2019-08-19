@@ -2,8 +2,9 @@ package com.tourism.dao;
 
 import com.tourism.model.PerEmer;
 import com.tourism.model.PerEmerExample;
-import java.util.List;
 import org.apache.ibatis.annotations.Param;
+
+import java.util.List;
 
 public interface PerEmerMapper {
     long countByExample(PerEmerExample example);
@@ -27,4 +28,6 @@ public interface PerEmerMapper {
     int updateByPrimaryKeySelective(PerEmer record);
 
     int updateByPrimaryKey(PerEmer record);
+
+    List<PerEmer> selectAll();
 }

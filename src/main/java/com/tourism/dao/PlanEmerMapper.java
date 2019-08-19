@@ -2,8 +2,9 @@ package com.tourism.dao;
 
 import com.tourism.model.PlanEmer;
 import com.tourism.model.PlanEmerExample;
-import java.util.List;
 import org.apache.ibatis.annotations.Param;
+
+import java.util.List;
 
 public interface PlanEmerMapper {
     long countByExample(PlanEmerExample example);
@@ -27,4 +28,6 @@ public interface PlanEmerMapper {
     int updateByPrimaryKeySelective(PlanEmer record);
 
     int updateByPrimaryKey(PlanEmer record);
+
+    List<PlanEmer> selectAll();
 }
