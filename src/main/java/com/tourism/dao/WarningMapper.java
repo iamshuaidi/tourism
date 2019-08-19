@@ -2,8 +2,9 @@ package com.tourism.dao;
 
 import com.tourism.model.Warning;
 import com.tourism.model.WarningExample;
-import java.util.List;
 import org.apache.ibatis.annotations.Param;
+
+import java.util.List;
 
 public interface WarningMapper {
     long countByExample(WarningExample example);
@@ -15,6 +16,8 @@ public interface WarningMapper {
     int insert(Warning record);
 
     int insertSelective(Warning record);
+
+    List<Warning> selectAll();
 
     List<Warning> selectByExampleWithBLOBs(WarningExample example);
 
