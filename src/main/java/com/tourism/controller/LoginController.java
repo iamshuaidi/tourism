@@ -1,6 +1,5 @@
 package com.tourism.controller;
 
-
 import com.alibaba.fastjson.JSONObject;
 import com.tourism.service.LoginService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -47,5 +46,5 @@ public class LoginController {
     public String logout(@CookieValue("cookie") String cookie) {
         Map<String, Object> map = loginService.logout(cookie);
         return JSONObject.toJSONString(map);
-    }
+    }*/
 }
