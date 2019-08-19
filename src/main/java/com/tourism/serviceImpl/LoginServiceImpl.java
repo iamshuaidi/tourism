@@ -23,7 +23,6 @@ public class LoginServiceImpl implements LoginService {
     @Override
     public Map<String, Object> login(String phone, String password) {
         Map<String, Object> map = new HashMap<>();
-
         AdminExample example = new AdminExample();
         AdminExample.Criteria criteria = example.createCriteria();
         criteria.andPhoneEqualTo(phone);
@@ -38,26 +37,21 @@ public class LoginServiceImpl implements LoginService {
             map.put("message", "用户密码错误");
             return map;
         }
-
         Cookie cookie = cookieService.findByAdminId(admin.getId());
         if(cookie == null){
             cookieService.addCookie(admin.getId());
         }else{
-
             cookie.setCookieStatus(((Integer)0).byteValue());
             cookie.setCookie(UUID.randomUUID().toString());
             Date date = new Date();
             date.setTime(date.getTime() + 1000 * 24 * 3600);
             cookie.setValidTime(date);
             cookie.setLoginTime(new Date());
-
             cookieService.updateCookie(cookie);
         }
-
         map.put("cookie", cookie.getCookie());
         map.put("admin", admin);
         map.put("message", "OK");
-        //map.put("message", "OK");
         return map;
     }
 
