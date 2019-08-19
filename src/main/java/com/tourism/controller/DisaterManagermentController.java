@@ -44,18 +44,18 @@ public class DisaterManagermentController {
     }
 
     //编辑应急预案
-    @CrossOrigin(origins = "http://localhost:8080", maxAge = 3600)
-    @RequestMapping(path = "/editPlan", method = RequestMethod.GET)
+    //@CrossOrigin(origins = "http://localhost:8080", maxAge = 3600)
+    @RequestMapping(path = "/editPlan", method = RequestMethod.POST)
     @ResponseBody
-    public PlanEmer editPlan(Model model, @RequestParam("id") Integer id, @RequestParam("type") String type,
-                          @RequestParam("title")String title, @RequestParam("plan")String plan,
-                          @RequestParam("adminId")Integer adminId){
+    public PlanEmer editPlan(@RequestParam("id") Integer id, @RequestParam("type") String type,
+                          @RequestParam("title")String title, @RequestParam("plan")String plan
+                       ){
         PlanEmer planEmer = new PlanEmer();
         planEmer.setId(id);
         planEmer.setType(type);
         planEmer.setTitle(title);
         planEmer.setPlan(plan);
-        planEmer.setAdminId(adminId);
+        planEmer.setAdminId(1);
         emerService.editEmerPlan(planEmer);
         //跳转到应急预案中心
         return planEmer;
@@ -118,13 +118,12 @@ public class DisaterManagermentController {
     }
 
     //修改应急人员
-    @CrossOrigin(origins = "http://localhost:8080", maxAge = 3600)
+    @CrossOrigin
     @RequestMapping(path = "/editPerson", method = RequestMethod.POST)
     @ResponseBody
-    public PerEmer editPerson(Model model, @RequestParam("job")String job,
-                             @RequestParam("name") String name,@RequestParam("gender")String gender,
-                             @RequestParam("phone")String phone){
+    public PerEmer editPerson(@RequestParam("id") Integer id,@RequestParam("name") String name, @RequestParam("job")String job,@RequestParam("gender")String gender,@RequestParam("phone")String phone){
         PerEmer perEmer = new PerEmer();
+        perEmer.setId(id);
         perEmer.setName(name);
         perEmer.setPhone(phone);
         perEmer.setGender(gender);
@@ -207,21 +206,20 @@ public class DisaterManagermentController {
     }
 
     //前端发布预警，同时写入后台数据库作为新纪录
-    @CrossOrigin(origins = "http://localhost:8080", maxAge = 3600)
-    @RequestMapping(path = "/createWarning", method = RequestMethod.GET)
+    //@CrossOrigin
+    @RequestMapping(path = "/createWarning", method = RequestMethod.POST)
     @ResponseBody
-    public void createWarning(Model model, @RequestParam("id")Integer id,
-                @RequestParam("type") String type, @RequestParam("title") String title,
-                @RequestParam("content") String content, @RequestParam("state") String state,
-                @RequestParam("time")Date time, @RequestParam("adminId")Integer adminId){
+    public void createWarning(@RequestParam("type") String type, @RequestParam("title") String title,
+                                @RequestParam("content") String content
+                       ){
+        Date date = new Date();
         Warning warning = new Warning();
-        warning.setId(id);
         warning.setType(type);
         warning.setTitle(title);
         warning.setContent(content);
-        warning.setState(state);
-        warning.setTime(time);
-        warning.setAdminId(adminId);
+        warning.setState("正在预警");
+        warning.setTime(date);
+        warning.setAdminId(1);
         warningService.createWarning(warning);
         //跳转到首页
 //        return "index";
