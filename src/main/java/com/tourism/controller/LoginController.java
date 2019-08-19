@@ -46,5 +46,5 @@ public class LoginController {
     public String logout(@CookieValue("cookie") String cookie) {
         Map<String, Object> map = loginService.logout(cookie);
         return JSONObject.toJSONString(map);
-    }*/
+    }
 }
