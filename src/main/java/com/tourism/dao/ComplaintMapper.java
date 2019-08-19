@@ -16,21 +16,15 @@ public interface ComplaintMapper {
 
     int insertSelective(Complaint record);
 
-    List<Complaint> selectByExampleWithBLOBs(ComplaintExample example);
-
     List<Complaint> selectByExample(ComplaintExample example);
 
     Complaint selectByPrimaryKey(Integer id);
 
     int updateByExampleSelective(@Param("record") Complaint record, @Param("example") ComplaintExample example);
 
-    int updateByExampleWithBLOBs(@Param("record") Complaint record, @Param("example") ComplaintExample example);
-
     int updateByExample(@Param("record") Complaint record, @Param("example") ComplaintExample example);
 
     int updateByPrimaryKeySelective(Complaint record);
-
-    int updateByPrimaryKeyWithBLOBs(Complaint record);
 
     int updateByPrimaryKey(Complaint record);
 }

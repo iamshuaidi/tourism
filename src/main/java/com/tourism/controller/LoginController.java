@@ -1,6 +1,7 @@
 package com.tourism.controller;
 
 
+<<<<<<< HEAD
 import org.springframework.stereotype.Controller;
 
 @Controller
@@ -28,23 +29,53 @@ public class LoginController {
             model.addAttribute("msg", map.get("msg"));
             System.out.println("出错了");
             return "/register";
+=======
+import com.alibaba.fastjson.JSONObject;
+import com.tourism.service.LoginService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.*;
+
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletResponse;
+import java.util.Map;
+
+@Controller
+public class LoginController {
+
+    @Autowired
+    LoginService loginService;
+
+
+
+    @CrossOrigin
+    @RequestMapping(value = "/login", method = {RequestMethod.POST})
+    @ResponseBody
+
+    public String login(@RequestParam("phone") String phone, @RequestParam("password") String password,
+                        HttpServletResponse response) {
+
+        Map<String, Object> map =  loginService.login(phone, password);
+        if(!map.containsKey("cookie")){
+            return JSONObject.toJSONString(map);
+>>>>>>> 6daba140f586197155b3ad628823fdd35af11a22
         }
-      User user = userService.getUserByName(username);
-        System.out.println(user + "   " + user.getName());
-        model.addAttribute("user", user);
-        //注册成功跳转到个人中心
-        return "home";
+        // 如果登录成功
+        Cookie cookie = new Cookie("cookie", map.get("cookie").toString());
+        cookie.setPath("/");
+        cookie.setMaxAge(3600*24*5);
+        response.addCookie(cookie);
+
+
+
+        return JSONObject.toJSONString(map);
+
     }
 
-    public String login(Model model, @RequestParam("username") String username,
-                        @RequestParam("password") String password) {
-        Map<String, Object> map = userService.login(username, password);
-        if (map.containsKey("msg")) {
-            model.addAttribute("msg", map.get("msg"));
-            return "/checklogin";
-        }
-        model.addAttribute("user", map.get("user"));
-        //登陆成功跳转到个人中心
-        return "home";
-    }*/
+
+    @RequestMapping(path = {"/logout"}, method = {RequestMethod.GET, RequestMethod.POST})
+    public String logout(@CookieValue("cookie") String cookie) {
+        Map<String, Object> map = loginService.logout(cookie);
+        return JSONObject.toJSONString(map);
+    }
 }

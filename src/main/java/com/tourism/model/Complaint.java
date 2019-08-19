@@ -13,6 +13,8 @@ public class Complaint {
 
     private String gender;
 
+    private String content;
+
     private Date createTime;
 
     private String result;
@@ -20,8 +22,6 @@ public class Complaint {
     private Date dealTime;
 
     private Integer adminId;
-
-    private String content;
 
     public Integer getId() {
         return id;
@@ -63,6 +63,14 @@ public class Complaint {
         this.gender = gender == null ? null : gender.trim();
     }
 
+    public String getContent() {
+        return content;
+    }
+
+    public void setContent(String content) {
+        this.content = content == null ? null : content.trim();
+    }
+
     public Date getCreateTime() {
         return createTime;
     }
@@ -93,13 +101,5 @@ public class Complaint {
 
     public void setAdminId(Integer adminId) {
         this.adminId = adminId;
-    }
-
-    public String getContent() {
-        return content;
-    }
-
-    public void setContent(String content) {
-        this.content = content == null ? null : content.trim();
     }
 }
