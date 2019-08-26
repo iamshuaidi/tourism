@@ -20,8 +20,8 @@ public class WarningServiceImpl implements WarningService {
         return warningList;
     }
 
-    public void createWarning(Warning warning) {
-        warningMapper.insertSelective(warning);
+    public Warning createWarning(Warning warning) {
+        return warningMapper.selectByPrimaryKey(warningMapper.insertSelective(warning));
     }
 
     public void stopWarning(Integer warningID){

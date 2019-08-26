@@ -32,8 +32,8 @@ public class EmerServiceImpl implements EmerService {
         return planEmer;
     }
 
-    public void deleteEmerPlan(PlanEmer planEmer) {
-        planEmerMapper.deleteByPrimaryKey(planEmer.getId());
+    public void deleteEmerPlan(Integer id) {
+        planEmerMapper.deleteByPrimaryKey(id);
     }
 
     public List<PlanEmer> showPlans(){

@@ -12,7 +12,7 @@ public interface EmerService {
 
     public PlanEmer editEmerPlan(PlanEmer planEmer);
 
-    public void deleteEmerPlan(PlanEmer planEmer);
+    public void deleteEmerPlan(Integer id);
 
     public List<PlanEmer> showPlans();
 

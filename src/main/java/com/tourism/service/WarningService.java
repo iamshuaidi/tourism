@@ -8,7 +8,7 @@ public interface WarningService {
 
     public List<Warning> sendWarning();
 
-    public void createWarning(Warning warning);
+    public Warning createWarning(Warning warning);
 
     public void stopWarning(Integer warningID);
 }
